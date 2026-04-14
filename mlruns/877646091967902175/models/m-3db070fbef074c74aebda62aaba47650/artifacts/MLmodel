@@ -1,0 +1,22 @@
+artifact_path: file:c:/Users/shani/Downloads/COMP3610_Assignment-4/mlruns/877646091967902175/models/m-3db070fbef074c74aebda62aaba47650/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.12.6
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.8.0
+mlflow_version: 3.5.1
+model_id: m-3db070fbef074c74aebda62aaba47650
+model_size_bytes: 97237
+model_uuid: m-3db070fbef074c74aebda62aaba47650
+prompts: null
+run_id: 453987eddd254f26b641d9241d8f176f
+utc_time_created: '2026-04-14 07:36:25.453267'

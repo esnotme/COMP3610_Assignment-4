@@ -1,0 +1,10 @@
+artifact_location: file:c:/Users/shani/Downloads/COMP3610_Assignment-4/mlruns/877646091967902175/models/m-3db070fbef074c74aebda62aaba47650/artifacts
+creation_timestamp: 1776152185368
+experiment_id: '877646091967902175'
+last_updated_timestamp: 1776152195578
+model_id: m-3db070fbef074c74aebda62aaba47650
+model_type: null
+name: model
+source_run_id: 453987eddd254f26b641d9241d8f176f
+status: 2
+status_message: null
