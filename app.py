@@ -6,11 +6,12 @@ from uuid import uuid4
 from mlflow import pyfunc
 import pandas as pd
 import numpy as np
-
+import mlflow
 # Load model once at startup
 MODEL_NAME = "taxi-tip-regressor"
 MODEL_VERSION = 1
-model = pyfunc.load_model(f"models:/{MODEL_NAME}/{MODEL_VERSION}")
+model = mlflow.pyfunc.load_model("mlruns/877646091967902175/models/m-3db070fbef074c74aebda62aaba47650/artifacts")
+
 
 # Expected schema (from sklearn feature_names_in_)
 EXPECTED_COLS = [
@@ -31,8 +32,8 @@ class TripFeatures(BaseModel):
     trip_distance: float = Field(..., gt=0)
     passenger_count: int = Field(..., ge=1, le=6)
     fare_amount: float = Field(..., gt=0)
-    pickup_location: str = Field(..., regex="^(Bronx|Brooklyn|Queens|Manhattan|EWR|Staten Island|Unknown)$")
-    dropoff_location: str = Field(..., regex="^(Bronx|Brooklyn|Queens|Manhattan|EWR|Staten Island|Unknown)$")
+    pickup_location: str = Field(..., pattern="^(Bronx|Brooklyn|Queens|Manhattan|EWR|Staten Island|Unknown)$")
+    dropoff_location: str = Field(..., pattern="^(Bronx|Brooklyn|Queens|Manhattan|EWR|Staten Island|Unknown)$")
 
 # Helper to build features
 def build_features(features: TripFeatures):
