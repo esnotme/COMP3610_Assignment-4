@@ -1,4 +1,3 @@
-# test_app.py
 import warnings
 warnings.filterwarnings("ignore", category=UserWarning, module="mlflow")  # Suppress MLflow warnings during tests
 from fastapi.testclient import TestClient
@@ -6,6 +5,8 @@ from app import app
 
 client = TestClient(app)
 
+
+# Test for successful prediction with valid input
 def test_valid_prediction():
     response = client.post("/predict", json={
         "pickup_hour": 14,
@@ -23,6 +24,7 @@ def test_valid_prediction():
     assert "model_version" in data
     assert "prediction_id" in data
 
+# Test for batch prediction with multiple records
 def test_batch_prediction():
     response = client.post("/predict/batch", json=[
         {
@@ -51,6 +53,7 @@ def test_batch_prediction():
     assert "predictions" in data
     assert len(data["predictions"]) == 2
 
+# Test for invalid input data
 def test_invalid_prediction():
     response = client.post("/predict", json={
         "pickup_hour": 25,  # invalid
@@ -64,14 +67,16 @@ def test_invalid_prediction():
     })
     assert response.status_code == 422
 
+# Test for health endpoint
 def test_health_endpoint():
     response = client.get("/health")
     assert response.status_code == 200
     data = response.json()
     assert data["status"] == "ok"
     assert data["model_loaded"] is True
-    assert data["model_version"] == 1
+    assert data["model_version"] == 2  #reran cells so had to update to version 2
 
+# Test for edge case with extreme fare
 def test_edge_case_zero_distance():
     response = client.post("/predict", json={
         "pickup_hour": 8,

@@ -7,10 +7,12 @@ from mlflow import pyfunc
 import pandas as pd
 import numpy as np
 import mlflow
+
+
 # Load model once at startup
 MODEL_NAME = "taxi-tip-regressor"
-MODEL_VERSION = 1
-model = mlflow.pyfunc.load_model("mlruns/877646091967902175/models/m-3db070fbef074c74aebda62aaba47650/artifacts")
+MODEL_VERSION = 2
+model = mlflow.pyfunc.load_model("models:/taxi-tip-regressor/2")
 
 
 # Expected schema (from sklearn feature_names_in_)

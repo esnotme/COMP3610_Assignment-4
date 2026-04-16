@@ -1,0 +1,14 @@
+artifact_uri: file:c:/Users/shani/Downloads/COMP3610_Assignment-4/mlruns/877646091967902175/0bef8a92ed2f46c8be6e495f7cb03730/artifacts
+end_time: 1776321548574
+entry_point_name: ''
+experiment_id: '877646091967902175'
+lifecycle_stage: active
+run_id: 0bef8a92ed2f46c8be6e495f7cb03730
+run_name: RandomForestRegressor
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1776321500301
+status: 3
+tags: []
+user_id: shani
