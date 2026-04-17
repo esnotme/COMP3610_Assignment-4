@@ -1,17 +1,20 @@
 version: "3.9"
-
+# Configuration Required to Run the Project
 services:
   api:
     build: .
     container_name: taxi-tip-api
     ports:
-      - "8000:8000"
+      - "8000:8000" #Expose FastAPI on port 8000
     environment:
-      MODEL_NAME: taxi-tip-regressor
-      MODEL_VERSION: 2
-      MODEL_PATH: models:/taxi-tip-regressor/2
+      MODEL_NAME: taxi-tip-regressor # Name of the model to load from MLflow
+      MODEL_VERSION: 2 # Version of the model to load from MLflow
+      MODEL_PATH: /app/mlruns/877646091967902175/models/m-4d673b0d3e3640258eafeddcded84ee3/artifacts
+      # Model path where MLflow stores the model artifacts
+    volumes:
+    - ./mlruns:/mlruns
     depends_on:
-      - mlflow
+      - mlflow   #Ensure MLflow server starts before the API
     networks:
       - taxi-net
 
@@ -19,13 +22,13 @@ services:
     image: ghcr.io/mlflow/mlflow:latest
     container_name: mlflow-server
     ports:
-      - "5000:5000"
+      - "5000:5000"   #Expose MLflow server on port 5000
     command: mlflow server --host 0.0.0.0 --port 5000 --backend-store-uri sqlite:///mlflow.db --default-artifact-root /mlruns
     volumes:
-      - ./mlruns:/mlruns
+      - ./mlruns:/mlruns   #Share artefacts with API container
     networks:
       - taxi-net
 
 networks:
   taxi-net:
-    driver: bridge
+    driver: bridge  #Bridge network to allow communication between API and MLflow containers

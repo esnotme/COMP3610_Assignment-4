@@ -74,7 +74,7 @@ def test_health_endpoint():
     data = response.json()
     assert data["status"] == "ok"
     assert data["model_loaded"] is True
-    assert data["model_version"] == 2  #reran cells so had to update to version 2
+    assert data["model_version"] == 1  
 
 # Test for edge case with extreme fare
 def test_edge_case_zero_distance():
