@@ -7,12 +7,11 @@ services:
     ports:
       - "8000:8000"
     environment:
-      # Example environment variable for model path
-      MODEL_PATH: /app/mlruns/877646091967902175/models/m-3db070fbef074c74aebda62aaba47650/artifacts
       MODEL_NAME: taxi-tip-regressor
-      MODEL_VERSION: 1
+      MODEL_VERSION: 2
+      MODEL_PATH: models:/taxi-tip-regressor/2
     depends_on:
-      - mlflow   # only needed if you enable the bonus MLflow service
+      - mlflow
     networks:
       - taxi-net
 

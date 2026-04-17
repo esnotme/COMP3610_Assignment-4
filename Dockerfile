@@ -5,7 +5,7 @@ WORKDIR /app
 # Copy only necessary files
 COPY requirements.txt .
 COPY app.py .
-COPY mlruns/ ./mlruns/   
+COPY mlruns/ ./mlruns/
 
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt

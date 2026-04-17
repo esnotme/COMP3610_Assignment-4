@@ -1,4 +1,4 @@
-# app.py
+import os
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
@@ -8,14 +8,15 @@ import pandas as pd
 import numpy as np
 import mlflow
 
+# Load environment variables
+MODEL_NAME = os.getenv("MODEL_NAME", "taxi-tip-regressor")
+MODEL_VERSION = int(os.getenv("MODEL_VERSION", "1"))
+MODEL_PATH = os.getenv("MODEL_PATH", f"models:/{MODEL_NAME}/{MODEL_VERSION}")
 
 # Load model once at startup
-MODEL_NAME = "taxi-tip-regressor"
-MODEL_VERSION = 2
-model = mlflow.pyfunc.load_model("models:/taxi-tip-regressor/2")
+model = mlflow.pyfunc.load_model(MODEL_PATH)
 
-
-# Expected schema (from sklearn feature_names_in_)
+# Ensure the expected columns are defined for feature engineering
 EXPECTED_COLS = [
     "pickup_hour", "pickup_day_of_week", "trip_duration_minutes",
     "trip_speed_mph", "log_trip_distance", "fare_per_mile", "fare_per_minute",
